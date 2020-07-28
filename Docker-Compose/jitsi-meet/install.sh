@@ -23,14 +23,14 @@ check_exit_status() {
 greeting() {
 
     echo
-    echo "Hello, $USER. Let's get this system to the HomeServer Main-Setup."
+    echo "Hello, $USER. Let's install your Jitsi-Meet-Server."
     echo
 }
 install-jitsi() {
     sudo git clone https://github.com/jitsi/docker-jitsi-meet /opt/docker/jitsi-meet;
 	check_exit_status
 	
-	sudo rm -r ~/.jitsi-meet-cfg/
+	sudo rm -r ~/.jitsi-meet-cfg/;
 	
 	sudo mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody,jicofo,jvb,jigasi,jibri};
 	check_exit_status
@@ -46,6 +46,9 @@ install-jitsi() {
 	
 	sudo mv newdocker-compose.yml docker-compose.yml;
 	check_exit_status
+	
+	read -p "Please type in you hostname." hostname
+	sed -i "s/sub.domain.tld/$hostname" /opt/docker/jitsi-meet/docker-compose.yml;
 }
 leave() {
 
