@@ -37,10 +37,10 @@ update-script() {
     sudo mv update.sh ~/bin/up;
     check_exit_status
 
-    sudo export PATH=~/bin:$PATH;
+    export PATH=~/bin:$PATH;
     check_exit_status
 
-    sudo source ~/.bashrc;
+    source ~/.bashrc;
     check_exit_status
 }
 main-software() {
