@@ -19,6 +19,7 @@ $CONFIG = array (
   ),
   'overwrite.cli.url' => 'https://sub.domain.tld',
   'overwritehost' => 'sub.domain.tld',
+  'overwriteprotocol' => 'https',
   'trusted_proxies' =>
   array (
     0 => '123.45.6.7',

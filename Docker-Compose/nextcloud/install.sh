@@ -26,9 +26,6 @@ greeting() {
     echo
 }
 install-nextcloud() {
-	read -p "Have you already ran this script once? (yes/no)" answer
-	if [ "$answer" == "no" ]
-	then
 		read -p "Please type in your hostname." hostname
 		read -p "Please type in a new MYSQL_ROOT_PASSWORD." mysql_rpw
 		read -p "Please type in a new MYSQL_PASSWORD." mysql_pw
@@ -39,6 +36,7 @@ install-nextcloud() {
 		read -p "Please type in the IPAddress." ipaddress
 		sed -i "s/123.45.6.7/$ipaddress/" app/config/config.php;
 		sed -i "s/sub.domain.tld/$hostname/" app/config/config.php;
+		chown -R www-data:www-data app/;
 }
 leave() {
 

@@ -66,6 +66,7 @@ leave() {
     echo "- Setup Complete ! -"
     echo "--------------------"
     echo
+	export PATH=~/bin:$PATH;
     exit
 }
 
