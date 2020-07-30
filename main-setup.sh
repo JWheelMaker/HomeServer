@@ -57,7 +57,8 @@ main-software() {
 	sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 	check_exit_status
 	
-	docker-compose --version
+	docker-compose --version;
+	mkdir /opt/docker;
 }
 leave() {
 
@@ -66,7 +67,8 @@ leave() {
     echo "- Setup Complete ! -"
     echo "--------------------"
     echo
-	export PATH=~/bin:$PATH;
+	echo
+	echo "Please run    export PATH=~/bin:$PATH    to complete the installation."
     exit
 }
 

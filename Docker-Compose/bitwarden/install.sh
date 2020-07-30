@@ -2,7 +2,7 @@
 greeting() {
 
     echo
-    echo "Hello, $USER. Let's install your Nextcloud-Server."
+    echo "Hello, $USER. Let's install your Bitwarden-Server."
     echo
 }
 adjust() {
