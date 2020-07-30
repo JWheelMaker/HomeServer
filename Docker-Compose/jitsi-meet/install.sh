@@ -27,8 +27,11 @@ greeting() {
     echo
 }
 install-jitsi() {
-    sudo git clone https://github.com/jitsi/docker-jitsi-meet /opt/docker/jitsi-meet;
+    sudo git clone https://github.com/jitsi/docker-jitsi-meet;
 	check_exit_status
+	
+	mv docker-jitsi-meet/* ./;
+	rm -rf docker-jitsi-meet;
 	
 	sudo rm -r ~/.jitsi-meet-cfg/;
 	

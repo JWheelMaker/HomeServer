@@ -26,13 +26,17 @@ greeting() {
     echo
 }
 install-nextcloud() {
-	read -p "Please type in your hostname." hostname
-	read -p "Please type in a new MYSQL_ROOT_PASSWORD." mysql_rpw
-	read -p "Please type in a new MYSQL_PASSWORD." mysql_pw
-	sed -i "s/MYSQL_ROOT_PASSWORD=/MYSQL_ROOT_PASSWORD=$mysql_rpw" /opt/docker/nextcloud/docker-compose.yml;
-	sed -i "s/MYSQL_PASSWORD=/MYSQL_PASSWORD=$mysql_pw" /opt/docker/nextcloud/docker-compose.yml;
-	sed -i "s/sub.domain.tld/$hostname" /opt/docker/nextcloud/docker-compose.yml;
-	read -p "Have you already started your NC-Server once?" answer
+	read -p "Have you already ran this script once? (yes/no)" answer
+	if [ "$answer" == "no" ]
+	then
+		read -p "Please type in your hostname." hostname
+		read -p "Please type in a new MYSQL_ROOT_PASSWORD." mysql_rpw
+		read -p "Please type in a new MYSQL_PASSWORD." mysql_pw
+		sed -i "s/MYSQL_ROOT_PASSWORD=/MYSQL_ROOT_PASSWORD=$mysql_rpw" /opt/docker/nextcloud/docker-compose.yml;
+		sed -i "s/MYSQL_PASSWORD=/MYSQL_PASSWORD=$mysql_pw" /opt/docker/nextcloud/docker-compose.yml;
+		sed -i "s/sub.domain.tld/$hostname" /opt/docker/nextcloud/docker-compose.yml;
+	fi
+	read -p "Have you already started your NC-Server once and is it running? (yes/no)" answer
 	if [ "$answer" == "no" ]
     then
         exit 1

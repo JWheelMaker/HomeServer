@@ -45,7 +45,7 @@ update-script() {
 }
 main-software() {
 
-    sudo apt install -y docker curl git software-properties-common apache2-utils;
+    sudo apt install -y docker.io curl git software-properties-common apache2-utils;
 	check_exit_status
 	
 	sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -72,6 +72,6 @@ leave() {
 
 greeting
 update-script
-sudo up
+up
 main-software
 leave
