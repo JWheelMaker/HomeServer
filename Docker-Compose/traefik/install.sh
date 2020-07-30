@@ -26,21 +26,26 @@ greeting() {
     echo
 }
 install-traefik() {
-	chmod 600 /opt/docker/traefik/data/acme.json;
-	docker network create traefik_proxy;
-	read -p "Please type in your Email-Address." email
+read -p "Have you already ran the script once? (yes/no)" answer
+	if [ "$answer" == "no" ]
+    then
+		chmod 600 /opt/docker/traefik/data/acme.json;
+		docker network create traefik_proxy;
+		read -p "Please type in your Email-Address." email
 	
-	sed -i "s/mail@example.com/$email" /opt/docker/traefik/data/acme.json;
+		sed -i "s/mail@example.com/$email/" /opt/docker/traefik/data/acme.json;
 	
-	read -p "Please type in you Hostname." hostname
+		read -p "Please type in you Hostname." hostname
 	
-	sed -i "s/sub.domain.tld/$hostname" /opt/docker/traefik/docker-compose.yml;
+		sed -i "s/sub.domain.tld/$hostname/" /opt/docker/traefik/docker-compose.yml;
 	
-	read -p "Please type in a password for the Traefik Web-Interface." pw
-	echo $(htpasswd -nb adminuser $pw) | sed -e s/\\$/\\$\\$/g;
-	
-	read -p "Please type in the printed-out key." auth
-	sed -i "s/auth.basicauth.users=/auth.basicauth.users=$auth" /opt/docker/traefik/docker-compose.yml;
+		read -p "Please type in a password for the Traefik Web-Interface." pw
+		echo $(htpasswd -nb adminuser $pw) | sed -e s/\\$/\\$\\$/g;
+		echo -p "Please copy the printed-out key."
+		
+	else
+		read -p "Please type in the copied Auth-Key." auth
+		sed -i "s/auth.basicauth.users=/auth.basicauth.users=$auth/" /opt/docker/traefik/docker-compose.yml;
 }
 leave() {
 

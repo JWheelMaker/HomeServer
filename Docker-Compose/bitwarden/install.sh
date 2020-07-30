@@ -7,7 +7,7 @@ greeting() {
 }
 adjust() {
 	read -p "Please now type in your hostname." hostname
-	sed -i "s/sub.domain.tld/$hostname" /opt/docker/bitwarden/docker-compose.yml;
+	sed -i "s/sub.domain.tld/$hostname/" /opt/docker/bitwarden/docker-compose.yml;
 }
 leave() {
 

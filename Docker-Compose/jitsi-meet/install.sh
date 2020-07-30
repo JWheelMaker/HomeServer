@@ -51,7 +51,7 @@ install-jitsi() {
 	check_exit_status
 	
 	read -p "Please type in you hostname." hostname
-	sed -i "s/sub.domain.tld/$hostname" /opt/docker/jitsi-meet/docker-compose.yml;
+	sed -i "s/sub.domain.tld/$hostname/" /opt/docker/jitsi-meet/docker-compose.yml;
 }
 leave() {
 
