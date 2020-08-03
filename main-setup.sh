@@ -34,7 +34,7 @@ update-script() {
     sudo mkdir ~/bin;
     check_exit_status
 
-    sudo mv update.sh ~/bin/up;
+    sudo mv update.sh /bin/up;
     check_exit_status
 
     export PATH=~/bin:$PATH;
