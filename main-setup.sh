@@ -31,34 +31,28 @@ update-script() {
     sudo chmod a+x update.sh;
     check_exit_status
 
-    sudo mkdir ~/bin;
-    check_exit_status
-
     sudo mv update.sh /bin/up;
     check_exit_status
 
     export PATH=/bin:$PATH;
     check_exit_status
-
-    source /.bashrc;
-    check_exit_status
 }
 main-software() {
 
     sudo apt install -y docker.io curl git software-properties-common apache2-utils;
-	check_exit_status
-	
-	sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-	check_exit_status
-	
-	sudo chmod +x /usr/local/bin/docker-compose
-	check_exit_status
-	
-	sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-	check_exit_status
-	
-	docker-compose --version;
-	mkdir /opt/docker;
+        check_exit_status
+
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        check_exit_status
+
+        sudo chmod +x /usr/local/bin/docker-compose
+        check_exit_status
+
+        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+        check_exit_status
+
+        docker-compose --version;
+        mkdir /opt/docker;
 }
 leave() {
 
@@ -67,8 +61,8 @@ leave() {
     echo "- Setup Complete ! -"
     echo "--------------------"
     echo
-	echo
-	echo "Please run    export PATH=~/bin:$PATH    to complete the installation."
+        echo
+        echo "Please run    export PATH=~/bin:$PATH    to complete the installation."
     exit
 }
 
