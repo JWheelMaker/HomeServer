@@ -1,5 +1,4 @@
 #!/bin/bash
-
 check_exit_status() {
 
     if [ $? -eq 0 ]
@@ -26,7 +25,8 @@ greeting() {
     echo "Hello, $USER. Let's get this system to the HomeServer Main-Setup."
     echo
 }
-update-script() {
+
+updatescript() {
 
     sudo chmod a+x update.sh;
     check_exit_status
@@ -37,7 +37,7 @@ update-script() {
     export PATH=/bin:$PATH;
     check_exit_status
 }
-main-software() {
+mainsoftware() {
 
     sudo apt install -y docker.io curl git software-properties-common apache2-utils;
         check_exit_status
@@ -61,14 +61,12 @@ leave() {
     echo "- Setup Complete ! -"
     echo "--------------------"
     echo
-        echo
-        echo "Please run    export PATH=~/bin:$PATH    to complete the installation."
     exit
 }
 
 
 greeting
-update-script
+updatescript
 up
-main-software
+mainsoftware
 leave
