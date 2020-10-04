@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce:latest
     command: -H unix:///var/run/docker.sock
     restart: always
     ports:

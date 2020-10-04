@@ -20,7 +20,7 @@ services:
       - default
 
   nextcloud-app:
-    image: nextcloud
+    image: nextcloud:latest
     container_name: nextcloud-app
     restart: always
     volumes:
