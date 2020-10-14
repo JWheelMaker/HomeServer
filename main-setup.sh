@@ -42,7 +42,7 @@ mainsoftware() {
     sudo apt install -y docker.io curl git software-properties-common apache2-utils;
         check_exit_status
 
-        sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         check_exit_status
 
         sudo chmod +x /usr/local/bin/docker-compose
