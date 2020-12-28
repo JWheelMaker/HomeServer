@@ -25,7 +25,7 @@ greeting() {
     echo "Hello, $USER. Let's install your Traefik-Proxy."
     echo
 }
-install-traefik() {
+installtraefik() {
 
     read -p "Have you already ran the script once? (yes/no)" answer
 	if [ "$answer" == "no" ]
@@ -66,4 +66,4 @@ leave() {
 }
 
 greeting
-install-traefik
+installtraefik

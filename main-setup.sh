@@ -52,7 +52,7 @@ mainsoftware() {
         check_exit_status
 
         docker-compose --version;
-        mkdir /opt/docker;
+        sudo mkdir /opt/docker;
 }
 leave() {
 

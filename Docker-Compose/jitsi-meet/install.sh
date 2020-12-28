@@ -27,15 +27,12 @@ greeting() {
     echo
 }
 install-jitsi() {
-    sudo git clone https://github.com/jitsi/docker-jitsi-meet;
+    sudo git clone https://github.com/jitsi/docker-jitsi-meet /opt/docker/jitsi-meet;
 	check_exit_status
-	
-	mv docker-jitsi-meet/* ./;
-	rm -rf docker-jitsi-meet;
 	
 	sudo rm -r ~/.jitsi-meet-cfg/;
 	
-	sudo mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody,jicofo,jvb,jigasi,jibri};
+	mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody,jicofo,jvb,jigasi,jibri};
 	check_exit_status
 	
 	sudo cp env.example .env;
@@ -52,6 +49,10 @@ install-jitsi() {
 	
 	read -p "Please type in you hostname." hostname
 	sed -i "s/sub.domain.tld/$hostname/" /opt/docker/jitsi-meet/docker-compose.yml;
+	
+	sed -i "s/UTC/Europe/Berlin/" /opt/docker/jitsi-meet/.env;
+	sed -i "s/#PUBLIC_URL/PUBLIC_URL/" /opt/docker/jitsi-meet/.env;
+	sed -i "s/meet.example.com/$hostname/" /opt/docker/jitsi-meet/.env;
 }
 leave() {
 
