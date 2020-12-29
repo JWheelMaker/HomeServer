@@ -35,24 +35,23 @@ install-jitsi() {
 	mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody,jicofo,jvb,jigasi,jibri};
 	check_exit_status
 	
-	sudo cp opt/docker/jitsi-meet/env.example opt/docker/jitsi-meet/.env;
+	sudo cp /opt/docker/jitsi-meet/env.example /opt/docker/jitsi-meet/.env;
 	check_exit_status
 	
-	sudo opt/docker/jitsi-meet/gen-passwords.sh;
+	sudo /opt/docker/jitsi-meet/gen-passwords.sh;
 	check_exit_status
 	
-	sudo rm opt/docker/jitsi-meet/docker-compose.yml;
+	sudo rm /opt/docker/jitsi-meet/docker-compose.yml;
 	check_exit_status
 	
-	sudo mv newdocker-compose.yml opt/docker/jitsi-meet/docker-compose.yml;
+	sudo mv /opt/docker/jitsi-install/newdocker-compose.yml /opt/docker/jitsi-meet/docker-compose.yml;
 	check_exit_status
 	
-	sudo mv cleanup.sh /opt/docker/jitsi-meet
+	sudo mv /opt/docker/jitsi-install/cleanup.sh /opt/docker/jitsi-meet
 	
 	read -p "Please type in you hostname." hostname
 	sed -i "s/sub.domain.tld/$hostname/" /opt/docker/jitsi-meet/docker-compose.yml;
-	
-	sed -i "s/UTC/Europe/Berlin/" /opt/docker/jitsi-meet/.env;
+
 	sed -i "s/#PUBLIC_URL/PUBLIC_URL/" /opt/docker/jitsi-meet/.env;
 	sed -i "s/meet.example.com/$hostname/" /opt/docker/jitsi-meet/.env;
 }
@@ -63,6 +62,7 @@ leave() {
     echo "- Setup Complete ! -"
     echo "--------------------"
     echo
+	cd /opt/docker/;
 	bash /opt/docker/jitsi-meet/cleanup.sh;
     exit
 }
