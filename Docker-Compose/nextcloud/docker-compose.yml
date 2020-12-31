@@ -5,7 +5,7 @@ services:
     image: mariadb:latest
     container_name: nextcloud-db
     command: --transaction-isolation=READ-COMMITTED --log-bin=ROW
-    restart: always
+    restart: unless-stopped
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
@@ -19,12 +19,28 @@ services:
     networks:
       - default
 
+  nextcloud-redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    hostname: nextcloud-redis
+    networks:
+        - default
+    restart: unless-stopped
+    command: redis-server --requirepass test # Redis Passwort eingeben
+
   nextcloud-app:
     image: nextcloud:latest
     container_name: nextcloud-app
-    restart: always
+    restart: unless-stopped
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    environment:
+        REDIS_HOST: nextcloud-redis
+        REDIS_HOST_PASSWORD: test # Redis Passwort von oben wieder eingeben
     volumes:
       - /opt/docker/nextcloud/app:/var/www/html
+      - /opt/docker/nextcloud/data:/var/www/html/data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud-app.entrypoints=http"
