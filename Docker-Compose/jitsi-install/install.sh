@@ -27,33 +27,46 @@ greeting() {
     echo
 }
 install-jitsi() {
-    sudo git clone https://github.com/jitsi/docker-jitsi-meet /opt/docker/jitsi-meet;
-	check_exit_status
+	read -p "Do you run this script from outside its folder? (yes/no)" answer
+	if [ "$answer" == "yes" ]
+    then
+		sudo git clone https://github.com/jitsi/docker-jitsi-meet /opt/docker/jitsi-meet;
+		check_exit_status
 	
-	sudo rm -r ~/.jitsi-meet-cfg/;
+		sudo rm -r ~/.jitsi-meet-cfg/;
 	
-	mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody,jicofo,jvb,jigasi,jibri};
-	check_exit_status
+		mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody,jicofo,jvb,jigasi,jibri};
+		check_exit_status
 	
-	sudo cp /opt/docker/jitsi-meet/env.example /opt/docker/jitsi-meet/.env;
-	check_exit_status
+		sudo cp /opt/docker/jitsi-meet/env.example /opt/docker/jitsi-meet/.env;
+		check_exit_status
 	
-	sudo /opt/docker/jitsi-meet/gen-passwords.sh;
-	check_exit_status
+		sudo /opt/docker/jitsi-meet/gen-passwords.sh;
+		check_exit_status
 	
-	sudo rm /opt/docker/jitsi-meet/docker-compose.yml;
-	check_exit_status
+		sudo rm /opt/docker/jitsi-meet/docker-compose.yml;
+		check_exit_status
 	
-	sudo mv /opt/docker/jitsi-install/newdocker-compose.yml /opt/docker/jitsi-meet/docker-compose.yml;
-	check_exit_status
+		sudo mv /opt/docker/jitsi-install/newdocker-compose.yml /opt/docker/jitsi-meet/docker-compose.yml;
+		check_exit_status
 	
-	sudo mv /opt/docker/jitsi-install/cleanup.sh /opt/docker/jitsi-meet
+		sudo mv /opt/docker/jitsi-install/cleanup.sh /opt/docker/jitsi-meet
 	
-	read -p "Please type in you hostname." hostname
-	sed -i "s/sub.domain.tld/$hostname/" /opt/docker/jitsi-meet/docker-compose.yml;
+		read -p "Please type in you hostname." hostname
+		sed -i "s/sub.domain.tld/$hostname/" /opt/docker/jitsi-meet/docker-compose.yml;
 
-	sed -i "s/#PUBLIC_URL/PUBLIC_URL/" /opt/docker/jitsi-meet/.env;
-	sed -i "s/meet.example.com/$hostname/" /opt/docker/jitsi-meet/.env;
+		sed -i "s/#PUBLIC_URL/PUBLIC_URL/" /opt/docker/jitsi-meet/.env;
+		sed -i "s/meet.example.com/$hostname/" /opt/docker/jitsi-meet/.env;
+		
+		leave
+	
+	else
+		echo
+		echo
+		echo "Please leave the script's directory and run it again!"
+		echo
+		exit
+	fi
 }
 leave() {
 
@@ -69,4 +82,3 @@ leave() {
 
 greeting
 install-jitsi
-leave

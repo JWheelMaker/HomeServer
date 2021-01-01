@@ -26,7 +26,7 @@ services:
     networks:
         - default
     restart: unless-stopped
-    command: redis-server --requirepass test # Redis Passwort eingeben
+    command: redis-server --requirepass redispw # Redis Passwort eingeben
 
   nextcloud-app:
     image: nextcloud:latest
@@ -37,7 +37,7 @@ services:
       - nextcloud-redis
     environment:
         REDIS_HOST: nextcloud-redis
-        REDIS_HOST_PASSWORD: test # Redis Passwort von oben wieder eingeben
+        REDIS_HOST_PASSWORD: redispw # Redis Passwort von oben wieder eingeben
     volumes:
       - /opt/docker/nextcloud/app:/var/www/html
       - /opt/docker/nextcloud/data:/var/www/html/data
