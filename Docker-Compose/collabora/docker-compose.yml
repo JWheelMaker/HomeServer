@@ -10,7 +10,7 @@ services:
     expose:
       - 9980
     environment:
-      - domain=sub.domain.tld #Gebt hier eure Nextcloud Domain an. Wenn ihr dies nicht nutzt, dann entfernt diese Zeile
+      - domain=nextcloud.domain #Gebt hier eure Nextcloud Domain an. Wenn ihr dies nicht nutzt, dann entfernt diese Zeile
       - username=adminuser     #Nutzername eingeben
       - password=        #Passwort eingeben
       - "extra_params=--o:ssl.enable=false --o:ssl.termination=true"

@@ -27,7 +27,7 @@ greeting() {
 }
 repair() {
 
-    read -p "Is your Nextcloud-Instance running? (yes/no)" answer
+    read -p "Is your Nextcloud-Instance running AND have you already created an admin user? (yes/no)" answer
 	if [ "$answer" == "yes" ]
     then
 		docker-compose exec --user www-data nextcloud-app php occ db:add-missing-indices
