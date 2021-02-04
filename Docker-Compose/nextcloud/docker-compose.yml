@@ -41,6 +41,8 @@ services:
     volumes:
       - /opt/docker/nextcloud/app:/var/www/html
       - /opt/docker/nextcloud/data:/var/www/html/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud-app.entrypoints=http"
