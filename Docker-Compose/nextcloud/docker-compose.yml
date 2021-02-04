@@ -15,7 +15,7 @@ services:
       - MYSQL_PASSWORD=  # Datenbank Passwort wählen, wird bei der Nextcloudinstallation abgefragt
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_INITDB_SKIP_TZINFO=1 # Behebt die bekannten Startprobleme der Datenbank
+      - MYSQL_INITDB_SKIP_TZINFO=1 # Behebt die bekannten Startprobleme der Datenbank 
     networks:
       - default
 
