@@ -186,6 +186,7 @@ echo
 
 echo "Backup Nextcloud database (MySQL/MariaDB)..."
 tar -cpzf "${backupdir}/${fileNameBackupDBDir}" -C "${nextcloudDBDir}" .
+cp /opt/docker/nextcloud/docker-compose.yml "${backupdir}"
 echo "Done"
 
 #

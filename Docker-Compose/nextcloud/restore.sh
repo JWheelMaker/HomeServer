@@ -146,6 +146,7 @@ echo
 echo "Deleting old Nextcloud database directory..."
 rm -r "${nextcloudDBDir}"
 mkdir -p "${nextcloudDBDir}"
+rm /opt/docker/nextcloud/docker-compose.yml
 echo "Done"
 echo
 
@@ -167,6 +168,7 @@ echo "Restoring Nextcloud file and database directory..."
 if [ "$useCompression" = true ] ; then
     tar -xmpzf "${currentRestoreDir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}"
     tar -xmpzf "${currentRestoreDir}/${fileNameBackupDBDir}" -C "${nextcloudDBDir}"
+	cp "${currentRestoreDir}/docker-compose.yml" /opt/docker/nextcloud/
 else
     tar -xmpf "${currentRestoreDir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}"
 fi
