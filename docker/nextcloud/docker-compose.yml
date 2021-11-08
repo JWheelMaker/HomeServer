@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+  nextcloud-db:
+    image: mariadb:latest
+    container_name: nextcloud-db
+    command: --transaction-isolation=READ-COMMITTED --log-bin=ROW --innodb_read_only_compressed=OFF
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /opt/docker/nextcloud/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql_rpw  # Datenbank Passwort wählen
+      - MYSQL_PASSWORD=mysql_pw  # Datenbank Passwort wählen, wird bei der Nextcloudinstallation abgefragt
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_INITDB_SKIP_TZINFO=1 # Behebt die bekannten Startprobleme der Datenbank 
+    ports:
+      - "3307:3306"
+    networks:
+      - default
+
+  nextcloud-redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    hostname: nextcloud-redis
+    networks:
+        - default
+    restart: unless-stopped
+    command: redis-server --requirepass redispw # Redis Passwort eingeben
+
+  nextcloud-app:
+    image: nextcloud:latest
+    container_name: nextcloud-app
+    build: ./
+    restart: unless-stopped
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    environment:
+        REDIS_HOST: nextcloud-redis
+        REDIS_HOST_PASSWORD: redispw # Redis Passwort von oben wieder eingeben
+    volumes:
+      - /opt/docker/nextcloud/app:/var/www/html
+#      - /media/HDD1/ncdata:/var/www/html/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    ports:
+      - "84:80"
+    networks:
+      - default

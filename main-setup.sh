@@ -39,16 +39,16 @@ updatescript() {
 }
 mainsoftware() {
 
-    sudo apt install -y docker.io curl git software-properties-common apache2-utils;
+    sudo apt install -y docker.io curl git software-properties-common;
         check_exit_status
 
-        sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         check_exit_status
 
         sudo chmod +x /usr/local/bin/docker-compose
         check_exit_status
 
-        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+		sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
         check_exit_status
 
         docker-compose --version;

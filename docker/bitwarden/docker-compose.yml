@@ -1,0 +1,9 @@
+version: '3'
+services:
+  bitwarden:
+    image: bitwardenrs/server:latest
+    restart: unless-stopped
+    volumes:
+       - /opt/docker/bitwarden/data:/data
+    ports:
+      - 82:80
