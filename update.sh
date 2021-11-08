@@ -28,19 +28,19 @@ greeting() {
 }
 update() {
 
-    sudo apt-get update;
+    apt-get update;
     check_exit_status
 
-    sudo apt-get upgrade -y;
+    apt-get upgrade -y;
     check_exit_status
 
-    sudo apt-get dist-upgrade -y;
+    apt-get dist-upgrade -y;
     check_exit_status
 
-    sudo apt-get autoremove -y;
+    apt-get autoremove -y;
     check_exit_status
 
-    sudo apt-get autoclean -y;
+    apt-get autoclean -y;
     check_exit_status
 }
 leave() {
