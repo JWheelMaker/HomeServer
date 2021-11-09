@@ -11,8 +11,8 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /opt/docker/nextcloud/db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=mysql_rpw  # Datenbank Passwort wählen
-      - MYSQL_PASSWORD=mysql_pw  # Datenbank Passwort wählen, wird bei der Nextcloudinstallation abgefragt
+      - MYSQL_ROOT_PASSWORD=$mysql_rpw  # Datenbank Passwort wählen
+      - MYSQL_PASSWORD=$mysql_pw  # Datenbank Passwort wählen, wird bei der Nextcloudinstallation abgefragt
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_INITDB_SKIP_TZINFO=1 # Behebt die bekannten Startprobleme der Datenbank 

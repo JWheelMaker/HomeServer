@@ -34,7 +34,6 @@ install-nextcloud() {
 		sed -i "s/redispw/$redispw/" /opt/docker/nextcloud/docker-compose.yml;
 
 		chown -R www-data:www-data app/;
-		chown -R www-data:www-data data/;
 }
 leave() {
 
