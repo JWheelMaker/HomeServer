@@ -34,11 +34,6 @@ services:
     image: nextcloud:latest
     container_name: nextcloud-app
     build: ./
-    healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost/cron.php"]
-        interval: 5m   
-        timeout: 15s
-        retries: 2
     restart: unless-stopped
     depends_on:
       - nextcloud-db
