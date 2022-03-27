@@ -1,3 +1,10 @@
 # HomeServer
 
-Fertige Files, Scipts und Konfigurationen für HomeServer-Apps wie Nextcloud, Jitsi, Bitwarden, Collabora oder Portainer.
+Complete Setup and Configuration for Portainer and Docker-Compose based HomeServer-Setup on RaspberryPi 4 x64
+
+The following apps are available at the moment:
+
+ - Nextcloud (private cloud suite)
+ - WireGuard (VPN-Server)
+ - Home-Assistant (home automation software)
+ - Nginx-Proxy-Manager (Nginx based reverse proxy)

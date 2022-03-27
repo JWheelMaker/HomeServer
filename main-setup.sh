@@ -1,72 +1,56 @@
 #!/bin/bash
-check_exit_status() {
+ echo
+ echo "Hello, $USER. Let's get this system to the HomeServer Main-Setup."
+ echo
 
-    if [ $? -eq 0 ]
-    then
-        echo
-        echo "Success"
-        echo
-    else
-        echo
-        echo "[ERROR] Process Failed!"
-        echo
+#up-script
+chmod a+x ./scripts/up-command.sh;
+mv ./scripts/up-command.sh /bin/up;
+export PATH=/bin:$PATH;
 
-        read -p "The last command exited with an error. Exit script? (yes/no) " answer
+#install docker engine
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+	
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-        if [ "$answer" == "yes" ]
-        then
-            exit 1
-        fi
-    fi
-}
-greeting() {
+sudo apt install ddclient
 
-    echo
-    echo "Hello, $USER. Let's get this system to the HomeServer Main-Setup."
-    echo
-}
+#install docker compose
+DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+mkdir -p $DOCKER_CONFIG/cli-plugins
+curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-aarch64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+docker compose version
 
-updatescript() {
+#fixing permissions for nextcloud app folder
+mkdir /opt/docker;
+mkdir -p /opt/docker/nextcloud/app
+chown -R www-data:www-data /opt/docker/nextcloud/app
 
-    chmod a+x update.sh;
-    check_exit_status
+#setting up portainer
+cp -R ./manual/portainer /opt/docker
+cd /opt/docker/portainer
+docker compose pull
+docker compose up -d
 
-    mv update.sh /bin/up;
-    check_exit_status
+echo Visit http://IP-ADDRESS:9000 to configure portainer.
 
-    export PATH=/bin:$PATH;
-    check_exit_status
-}
-mainsoftware() {
-
-    apt install -y docker.io curl git software-properties-common;
-        check_exit_status
-
-        curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        check_exit_status
-
-        chmod +x /usr/local/bin/docker-compose
-        check_exit_status
-
-		ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-        check_exit_status
-
-        docker-compose --version;
-        mkdir /opt/docker;
-}
-leave() {
-
-    echo
-    echo "--------------------"
-    echo "- Setup Complete ! -"
-    echo "--------------------"
-    echo
-    exit
-}
+cp -R ./scripts /
 
 
-greeting
-updatescript
+echo
+echo "--------------------"
+echo "- Setup Complete ! -"
+echo "--------------------"
+echo
+exit
+
 up
-mainsoftware
-leave
