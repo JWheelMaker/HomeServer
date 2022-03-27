@@ -44,6 +44,7 @@ docker compose up -d
 echo Visit http://IP-ADDRESS:9000 to configure portainer.
 
 cp -R ./scripts /
+chmod +x /scripts/*
 
 
 echo
