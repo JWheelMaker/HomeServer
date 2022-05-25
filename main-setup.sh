@@ -3,6 +3,7 @@
  echo "Hello, $USER. Let's get this system to the HomeServer Main-Setup."
  echo
 
+
 #up-script
 chmod a+x ./scripts/up-command.sh;
 mv ./scripts/up-command.sh /bin/up;
@@ -27,6 +28,10 @@ sudo apt install ddclient
 sudo apt-get instll docker-compose-plugin
 docker compose version
 
+#moving scripts to root dir
+cp -R ./scripts /
+chmod +x /scripts/*
+
 #fixing permissions for nextcloud app folder
 mkdir /opt/docker;
 mkdir -p /opt/docker/nextcloud/app
@@ -39,9 +44,6 @@ docker compose pull
 docker compose up -d
 
 echo Visit http://IP-ADDRESS:9000 to configure portainer.
-
-cp -R ./scripts /
-chmod +x /scripts/*
 
 
 echo
