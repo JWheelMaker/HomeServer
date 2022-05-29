@@ -36,7 +36,6 @@ cp -R ./scripts /
 chmod +x /scripts/*
 
 #fixing permissions for nextcloud app folder
-mkdir /opt/docker;
 mkdir -p /opt/docker/nextcloud/app
 chown -R www-data:www-data /opt/docker/nextcloud/app
 
