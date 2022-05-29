@@ -45,6 +45,10 @@ cd /opt/docker/portainer
 docker compose pull
 docker compose up -d
 
+#create docker networks
+docker network create frontend
+docker network create backend
+
 echo Visit http://IP-ADDRESS:9000 to configure portainer.
 
 
